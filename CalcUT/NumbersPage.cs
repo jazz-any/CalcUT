@@ -9,8 +9,8 @@ namespace CalcUT
 {
     public class NumbersPage
     {
-        private Window window;
-        private Dictionary<string, Button> symbolToButtonMappings;
+        private readonly Window window;
+        private readonly Dictionary<string, Button> symbolButtons;
 
         public NumbersPage(Window window)
         {
@@ -21,20 +21,27 @@ namespace CalcUT
                 .ToDictionary(i => i, i => i);
             symbolToButtonNameMappings["-"] = "+/-";
 
-            symbolToButtonMappings = symbolToButtonNameMappings
+            symbolButtons = symbolToButtonNameMappings
                 .ToDictionary(mapping => mapping.Key,
                     mapping => window.Get<Button>(SearchCriteria.ByText(mapping.Value)));
 
             //var searchCriterias = buttonNames.Select(name => SearchCriteria.ByText(name));
             //buttons = searchCriterias.Select(criteria => window.Get<Button>(criteria)).ToArray();
         }
-        // window.Get<Button>(SearchCriteria.ByText("1"))
+            // window.Get<Button>(SearchCriteria.ByText("1"))
 
-        public void Parse(decimal number)
+        public void SendNumber(decimal number)
         {
-            foreach (var c in number.ToString())
+            var absoluteNumber = Math.Abs(number);
+
+            foreach (var c in absoluteNumber.ToString())
             {
-                symbolToButtonMappings[c.ToString()].Click();
+                symbolButtons[c.ToString()].Click();
+            }
+
+            if (number < 0)
+            {
+                symbolButtons["-"].Click();
             }
         }
 

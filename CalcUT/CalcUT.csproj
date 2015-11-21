@@ -52,7 +52,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="OperationsPage.cs" />
+    <Compile Include="Test.cs" />
     <Compile Include="NumbersPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
