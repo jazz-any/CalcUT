@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using TestStack.White.UIItems;
 using TestStack.White.UIItems.Finders;
@@ -20,12 +21,9 @@ namespace CalcUT
             operationButtons = operations.ToDictionary(o => o, o => window.Get<Button>(SearchCriteria.ByText(o)));
         }
 
-        public void SendNumber(decimal number)
+        public void SendOperation(String operation)
         {
-            foreach (var c in number.ToString())
-            {
-                operationButtons[c.ToString()].Click();
-            }
+                operationButtons[operation].Click();
         }
     }
 }

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TestCases>
+  <Test>
+    <Input>7/2</Input>
+    <Result>0.5</Result>
+  </Test>
+  <Test>
+    <Input>4/3</Input>
+    <Result>1.33333333</Result>
+  </Test>
+  <Test>
+    <Input>12/3/2</Input>
+    <Result>2</Result>
+  </Test>
+  <Test>
+    <Input>3/0</Input>
+    <Error>Division by zero.</Error>
+  </Test>
+</TestCases>
