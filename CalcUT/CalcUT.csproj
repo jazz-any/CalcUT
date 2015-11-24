@@ -50,10 +50,13 @@
       <HintPath>..\packages\TestStack.White.0.13.3\lib\net40\TestStack.White.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="UIAutomationClient" />
+    <Reference Include="UIAutomationTypes" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExternalDataHelper.cs" />
     <Compile Include="OperationsPage.cs" />
+    <Compile Include="ResultPage.cs" />
     <Compile Include="Test.cs" />
     <Compile Include="NumbersPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -65,7 +68,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="TestCasesData.xml" />
+    <Content Include="TestCasesData.xml">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
