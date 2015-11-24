@@ -23,7 +23,7 @@ namespace CalcUT
 
         public void SendOperation(String operation)
         {
-                operationButtons[operation].Click();
+            operationButtons[operation].Click();
         }
     }
 }

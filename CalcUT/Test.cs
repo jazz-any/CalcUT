@@ -1,14 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text.RegularExpressions;
-using System.Windows.Automation;
 using System.Xml.Linq;
 using NUnit.Framework;
 using TestStack.White;
 using TestStack.White.Factory;
-using TestStack.White.UIItems;  
-using TestStack.White.UIItems.Finders;
 using TestStack.White.UIItems.WindowItems;
 
 namespace CalcUT
@@ -27,12 +22,10 @@ namespace CalcUT
         public void SetUp()
         {
             var applicationDirectory = TestContext.CurrentContext.TestDirectory;
-            var applicationPath = Path.Combine(@"D:\users\anastasiia.vasenko\Desktop\PracticalTask",
-                "AvalonCalculator.exe");
+            var applicationPath = Path.Combine(applicationDirectory, "AvalonCalculator.exe");
             Application application = Application.Launch(applicationPath);
             window = application.GetWindow("WPF Calculator", InitializeOption.NoCache);
 
-            //window.Get<Button>(SearchCriteria.ByText("1")).Click();
             numbersPage = new NumbersPage(window);
             operationsPage = new OperationsPage(window);
             resultPage = new ResultPage(window);
@@ -45,7 +38,7 @@ namespace CalcUT
             window.Dispose();
         }
 
-        public static IEnumerable<XElement> DivisionTestCases = ExternalDataHelper.Parser();
+        public static IEnumerable<XElement> DivisionTestCases = ExternalDataHelper.GetTestCaseData();
 
         [Test]
         [TestCaseSource("DivisionTestCases")]
@@ -83,93 +76,5 @@ namespace CalcUT
                 Assert.That(result.ErrorMessage, Is.EqualTo(testCaseError));
             }
         }
-    }
-
-    public abstract class Expression
-    {
-        public static IEnumerable<Expression> Parse(string expressionString)
-        {
-            const char divisionOperator = '/';
-            var numbers = expressionString.Split(divisionOperator).Select(number => decimal.Parse(number)).ToList();
-            var expressions = new List<Expression> {new Number {Value = numbers.First()}};
-            foreach (var number in numbers.Skip(1))
-            {
-                expressions.Add(new DivisionOperation());
-                expressions.Add(new Number {Value = number});
-            }
-
-            return expressions;
-        }
-
-
-
-
-        public abstract class Operation : Expression
-        {
-            public abstract string Operator { get; }
-        }
-
-        public class DivisionOperation : Operation
-        {
-            public override string Operator
-            {
-                get { return "/"; }
-            }
-        }
-
-        public class Number : Expression
-        {
-            public decimal Value { get; set; }
-        }
-
-        //public static class ExpressionParser
-        //{
-
-
-        //    public static Expression Parse(string expressionString)
-        //    {
-
-        //    }
-        //}
-
-        //public abstract class Expression
-        //{
-        //    public abstract decimal Value { get; }        
-        //}
-
-        //public class Number : Expression
-        //{
-        //    public static Regex NumberRegex = new Regex("(\\d+)");
-
-        //    public Number(decimal value)
-        //    {
-        //        Value = value;
-        //    }
-
-        //    public override decimal Value { get; }
-        //}
-
-        //public abstract class BinaryOperation : Expression
-        //{
-        //    public abstract Expression Left { get; }
-        //    public abstract Expression Right { get; }
-        //}
-
-        //public class DivisionOperation : BinaryOperation
-        //{
-        //    public DivisionOperation(Expression left, Expression right)
-        //    {
-        //        Left = left;
-        //        Right = right;
-        //    }
-
-        //    public override decimal Value
-        //    {
-        //        get { return Left.Value/Right.Value; }
-        //    }
-
-        //    public override Expression Left { get; }
-        //    public override Expression Right { get; }
-        //}
     }
 }

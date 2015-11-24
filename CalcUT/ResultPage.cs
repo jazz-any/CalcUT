@@ -9,11 +9,10 @@ namespace CalcUT
     public class ResultPage
     {
         private readonly Window window;
-        public Button resultButton;
-        public TextBox resultField;
-        public TextBox resultScreen;
-        public SearchCriteria errorMessage;
-        public SearchCriteria okButton;
+        private Button resultButton;
+        private TextBox resultField;
+        private TextBox resultScreen;
+        private SearchCriteria okButtonCriteria;
 
         public ResultPage(Window window)
         {
@@ -23,8 +22,7 @@ namespace CalcUT
             resultField = edits.First(edit => edit.Text == "0");
             resultScreen = edits.First(edit => edit != resultField);
             resultButton = window.Get<Button>(SearchCriteria.ByText("="));
-            errorMessage = SearchCriteria.ByText("Operation cannot be perfomed");
-            okButton = SearchCriteria.ByText("OK");
+            okButtonCriteria = SearchCriteria.ByText("OK");
         }
 
         public Result GetResult()
@@ -34,7 +32,7 @@ namespace CalcUT
             if (modalWindow != null)
             {
                 var errorMessage = modalWindow.Get<Label>().Text;
-                modalWindow.Get<Button>(okButton).Click();
+                modalWindow.Get<Button>(okButtonCriteria).Click();
                 return new Result {IsSuccessful = false, ErrorMessage = errorMessage};
             }
             var result = resultField.Text;

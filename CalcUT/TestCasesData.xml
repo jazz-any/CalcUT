@@ -16,4 +16,44 @@
     <Input>3/0</Input>
     <Error>Operation cannot be perfomed</Error>
   </Test>
+  <Test>
+    <Input>-12/3</Input>
+    <Result>-4</Result>
+  </Test>
+  <Test>
+    <Input>-12/-3</Input>
+    <Result>4</Result>
+  </Test>
+  <Test>
+    <Input>5/-1</Input>
+    <Result>-5</Result>
+  </Test>
+  <Test>
+    <Input>5/-0.2</Input>
+    <Result>-25</Result>
+  </Test>
+  <Test>
+    <Input>0.5/1</Input>
+    <Result>0.5</Result>
+  </Test>
+  <Test>
+    <Input>5/0.2</Input>
+    <Result>25</Result>
+  </Test>
+  <Test>
+    <Input>5/.2</Input>
+    <Result>25</Result>
+  </Test>
+  <Test>
+    <Input>0.2/0.2</Input>
+    <Result>1</Result>
+  </Test>
+  <Test>
+    <Input>4/2.</Input>
+    <Result>2</Result>
+  </Test>
+  <Test>
+    <Input>063/9</Input>
+    <Result>7</Result>
+  </Test>
 </TestCases>
